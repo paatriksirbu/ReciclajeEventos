@@ -48,14 +48,14 @@ class MainActivity : ComponentActivity() {
 fun PantallaPrincipal(navController: NavController) {
 
     var showButtons by remember { mutableStateOf(false) }
+    var greetingText by remember { mutableStateOf("Bienvenido, EcoAmigo!") }
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Bienvenido, EcoAmigo!")
+        Text(text = greetingText)
         Spacer(modifier = Modifier.height(16.dp))
-
         //Creamos un boton principal para mostrar las opciones
 
         if(!showButtons) {
