@@ -40,7 +40,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+
         val composeView = findViewById<ComposeView>(R.id.compose_view)
+
 
         composeView.setContent {
             ReciclajeEventosTheme {
