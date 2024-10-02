@@ -5,6 +5,7 @@ import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,6 +22,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -34,7 +37,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main) {
+        setContent {
             ReciclajeEventosTheme {
                 val navController = rememberNavController()
                 PantallaPrincipal(navController)
@@ -50,7 +53,7 @@ fun PantallaPrincipal(navController: NavController) {
     var showButtons by remember { mutableStateOf(false) }
     var greetingText by remember { mutableStateOf("Bienvenido, EcoAmigo!") }
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier.fillMaxSize().background(colorResource(id = R.color.verde_claro)).padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
