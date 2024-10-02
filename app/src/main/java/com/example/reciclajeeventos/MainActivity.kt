@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
             Column(
                 modifier = Modifier.fillMaxSize().padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Top
             ) {
                 //De esta manera solo mostramos el texto de saludo cuando no se han mostrado las opciones.
                 if (!showButtons) {
