@@ -5,6 +5,7 @@ import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,6 +22,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -50,15 +53,19 @@ fun PantallaPrincipal(navController: NavController) {
     var showButtons by remember { mutableStateOf(false) }
     var greetingText by remember { mutableStateOf("Bienvenido, EcoAmigo!") }
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier.fillMaxSize().background(colorResource(id = R.color.verde_claro)).padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = greetingText)
-        Spacer(modifier = Modifier.height(16.dp))
+        //De esta manera solo mostramos el texto de saludo cuando no se han mostrado las opciones.
+        if(!showButtons){
+            Text(text = greetingText)
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+
         //Creamos un boton principal para mostrar las opciones
 
-        if(!showButtons) {
+        if(!showButtons && greetingText.equals("Bienvenido, EcoAmigo!")) {
             Button(
                 onClick = { showButtons = true },
                 modifier = Modifier.padding(vertical = 8.dp).height(50.dp)
@@ -67,7 +74,7 @@ fun PantallaPrincipal(navController: NavController) {
             }
             Spacer(modifier = Modifier.height(16.dp))
         }
-        if (showButtons){
+        if (showButtons ){
             Button(onClick = {navController.navigate("calendar")}) {
                 Text(text = "Calendario")
             }
