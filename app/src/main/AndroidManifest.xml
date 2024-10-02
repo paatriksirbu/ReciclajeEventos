@@ -27,6 +27,14 @@
             </intent-filter>
 
         </activity>
+
+        <!-- Nueva actividad para Estadísticas -->
+        <activity
+            android:name=".EstadisticasActivity"
+            android:exported="true"
+            android:label="Estadísticas de Reciclaje"
+            android:theme="@style/Theme.ReciclajeEventos" />
+
     </application>
 
 </manifest>
