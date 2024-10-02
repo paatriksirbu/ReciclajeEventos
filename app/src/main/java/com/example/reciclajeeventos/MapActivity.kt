@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.ScaleGestureDetector
 import android.widget.ImageView
+import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.KeyEventDispatcher.Component
 
-class MapActivity : AppCompatActivity() {
+class MapActivity : ComponentActivity() {
 
     private lateinit var imageView: ImageView
     private lateinit var scaleGestureDetector: ScaleGestureDetector
