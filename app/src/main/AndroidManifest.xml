@@ -35,6 +35,12 @@
             android:label="Estadísticas de Reciclaje"
             android:theme="@style/Theme.ReciclajeEventos" />
 
+        <activity
+            android:name=".CalendarActivity"
+            android:exported="true"
+            android:label="Calendario"
+            android:theme="@style/Theme.ReciclajeEventos" />
+
     </application>
 
 </manifest>

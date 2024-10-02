@@ -4,9 +4,10 @@ package com.example.reciclajeeventos
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 
-class EstadisticasActivity : AppCompatActivity() {
+class EstadisticasActivity : ComponentActivity() {
 
     // Variables para llevar la cuenta de los reciclajes
     private var envasesCount = 0

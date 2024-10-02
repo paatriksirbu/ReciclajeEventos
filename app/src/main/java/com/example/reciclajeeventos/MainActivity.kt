@@ -30,7 +30,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.ui.platform.LocalContext
 
 import com.example.reciclajeeventos.ui.theme.ReciclajeEventosTheme
 import java.security.AccessController
@@ -61,6 +63,8 @@ class MainActivity : ComponentActivity() {
         ReciclajeEventosTheme {
             var showButtons by remember { mutableStateOf(false) }
             var greetingText by remember { mutableStateOf("Bienvenido, EcoAmigo!") }
+
+            val context = LocalContext.current
             Column(
                 modifier = Modifier.fillMaxSize().padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -84,20 +88,27 @@ class MainActivity : ComponentActivity() {
                     Spacer(modifier = Modifier.height(16.dp))
                 }
                 if (showButtons) {
+
                     Button(onClick = {
-                        val intent = Intent(this@MainActivity, CalendarActivity::class.java)
-                        startActivity(intent)
-                    }) {
+                        val intent = Intent(context, CalendarActivity::class.java)
+                        context.startActivity(intent)
+                    }){
                         Text(text = "Calendario")
                     }
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Button(onClick = { navController.navigate("mapa") }) {
+                    Button(onClick = {
+                        val intent = Intent(context, MapActivity::class.java)
+                        context.startActivity(intent)
+                    }) {
                         Text(text = "Mapa")
                     }
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Button(onClick = { navController.navigate("estadisticas") }) {
+                    Button(onClick = {
+                        val intent = Intent(context, EstadisticasActivity::class.java)
+                        context.startActivity(intent)
+                    }) {
                         Text(text = "Estadisticas")
                     }
                     Spacer(modifier = Modifier.height(16.dp))
