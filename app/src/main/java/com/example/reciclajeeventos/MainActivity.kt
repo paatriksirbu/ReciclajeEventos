@@ -1,5 +1,6 @@
 package com.example.reciclajeeventos
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.ComponentActivity
@@ -28,6 +29,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 
 import com.example.reciclajeeventos.ui.theme.ReciclajeEventosTheme
@@ -82,7 +84,10 @@ class MainActivity : ComponentActivity() {
                     Spacer(modifier = Modifier.height(16.dp))
                 }
                 if (showButtons) {
-                    Button(onClick = { navController.navigate("calendar") }) {
+                    Button(onClick = {
+                        val intent = Intent(this@MainActivity, CalendarActivity::class.java)
+                        startActivity(intent)
+                    }) {
                         Text(text = "Calendario")
                     }
                     Spacer(modifier = Modifier.height(16.dp))
