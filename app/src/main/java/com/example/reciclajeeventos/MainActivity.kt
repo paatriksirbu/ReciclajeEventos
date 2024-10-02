@@ -23,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,70 +37,77 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        setContent {
+
+        val composeView = findViewById<ComposeView>(R.id.compose_view)
+
+        composeView.setContent {
             ReciclajeEventosTheme {
                 val navController = rememberNavController()
                 PantallaPrincipal(navController)
             }
         }
-    }
-}
 
+}
 
 @Composable
 fun PantallaPrincipal(navController: NavController) {
 
-    var showButtons by remember { mutableStateOf(false) }
-    var greetingText by remember { mutableStateOf("Bienvenido, EcoAmigo!") }
-    Column(
-        modifier = Modifier.fillMaxSize().background(colorResource(id = R.color.verde_claro)).padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        //De esta manera solo mostramos el texto de saludo cuando no se han mostrado las opciones.
-        if(!showButtons){
-            Text(text = greetingText)
-            Spacer(modifier = Modifier.height(16.dp))
+    ReciclajeEventosTheme {
+        var showButtons by remember { mutableStateOf(false) }
+        var greetingText by remember { mutableStateOf("Bienvenido, EcoAmigo!") }
+        Column(
+            modifier = Modifier.fillMaxSize().background(colorResource(id = R.color.verde_claro)).padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            //De esta manera solo mostramos el texto de saludo cuando no se han mostrado las opciones.
+            if(!showButtons){
+                Text(text = greetingText)
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+
+            //Creamos un boton principal para mostrar las opciones
+
+            if(!showButtons && greetingText.equals("Bienvenido, EcoAmigo!")) {
+                Button(
+                    onClick = { showButtons = true },
+                    modifier = Modifier.padding(vertical = 8.dp).height(50.dp)
+                ) {
+                    Text(text = "Mostrar opciones")
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+            if (showButtons ){
+                Button(onClick = {navController.navigate("calendar")}) {
+                    Text(text = "Calendario")
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Button(onClick = {navController.navigate("mapa")}) {
+                    Text(text = "Mapa")
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Button(onClick = {navController.navigate("estadisticas")}) {
+                    Text(text = "Estadisticas")
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
         }
 
-        //Creamos un boton principal para mostrar las opciones
-
-        if(!showButtons && greetingText.equals("Bienvenido, EcoAmigo!")) {
-            Button(
-                onClick = { showButtons = true },
-                modifier = Modifier.padding(vertical = 8.dp).height(50.dp)
-            ) {
-                Text(text = "Mostrar opciones")
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-        if (showButtons ){
-            Button(onClick = {navController.navigate("calendar")}) {
-                Text(text = "Calendario")
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(onClick = {navController.navigate("mapa")}) {
-                Text(text = "Mapa")
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(onClick = {navController.navigate("estadisticas")}) {
-                Text(text = "Estadisticas")
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-        }
+    }
 
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+
     ReciclajeEventosTheme {
-        val navController = rememberNavController()
-        PantallaPrincipal(navController)
+        
+    }
 
     }
 }
