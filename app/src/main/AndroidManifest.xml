@@ -41,6 +41,12 @@
             android:label="Calendario"
             android:theme="@style/Theme.ReciclajeEventos" />
 
+        <activity
+            android:name=".MapActivity"
+            android:exported="true"
+            android:label="Calendario"
+            android:theme="@style/Theme.ReciclajeEventos" />
+
     </application>
 
 </manifest>
