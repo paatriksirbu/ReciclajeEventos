@@ -35,6 +35,28 @@ class MapActivity : ComponentActivity() {
 
     override fun onTouchEvent(event: android.view.MotionEvent): Boolean {
         scaleGestureDetector.onTouchEvent(event)
+        when(event.actionMasked) {
+            android.view.MotionEvent.ACTION_SCROLL -> {
+                val scrollDelta = event.getAxisValue(android.view.MotionEvent.AXIS_VSCROLL)
+                handleMouseScrollZoom(scrollDelta)
+            }
+        }
+
         return true
     }
+
+    private fun handleMouseScrollZoom(scrollDelta: Float) {
+        if (scrollDelta > 0) {
+            scaleFactor *= 1.1f // Acercar zoom
+        } else {
+            scaleFactor *= 0.9f // Alejar zoom
+        }
+
+        // Limitar el zoom entre 0.5x y 3.0x
+        scaleFactor = scaleFactor.coerceIn(0.5f, 3.0f)
+
+        imageView.scaleX = scaleFactor
+        imageView.scaleY = scaleFactor
+    }
+
 }
