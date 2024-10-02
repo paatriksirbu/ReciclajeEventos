@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@color/verde_claro">
+
+    <!-- TableLayout centrado -->
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1,2">
+
+        <!-- Primera fila con las categorías de reciclaje -->
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="Envases"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="Vidrio"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Orgánico"
+                android:textStyle="bold"
+                android:padding="16dp" />
+        </TableRow>
+
+        <!-- Segunda fila con los valores de reciclaje -->
+        <TableRow>
+            <TextView
+                android:id="@+id/envases_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0"
+                android:padding="16dp" />
+
+            <TextView
+                android:id="@+id/vidrio_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0"
+                android:padding="16dp" />
+
+            <TextView
+                android:id="@+id/organico_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="0" />
+        </TableRow>
+
+        <!-- Tercera fila con botones para incrementar los valores -->
+        <TableRow>
+            <Button
+                android:id="@+id/boton_envases"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+ Envases" />
+
+            <Button
+                android:id="@+id/boton_vidrio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+ Vidrio" />
+
+            <Button
+                android:id="@+id/boton_organico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+ Orgánico" />
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>
