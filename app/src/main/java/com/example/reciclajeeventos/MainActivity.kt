@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
+        setContentView(R.layout.activity_main) {
             ReciclajeEventosTheme {
                 val navController = rememberNavController()
                 PantallaPrincipal(navController)
@@ -54,11 +54,15 @@ fun PantallaPrincipal(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = greetingText)
-        Spacer(modifier = Modifier.height(16.dp))
+        //De esta manera solo mostramos el texto de saludo cuando no se han mostrado las opciones.
+        if(!showButtons){
+            Text(text = greetingText)
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+
         //Creamos un boton principal para mostrar las opciones
 
-        if(!showButtons) {
+        if(!showButtons && greetingText.equals("Bienvenido, EcoAmigo!")) {
             Button(
                 onClick = { showButtons = true },
                 modifier = Modifier.padding(vertical = 8.dp).height(50.dp)
@@ -67,7 +71,7 @@ fun PantallaPrincipal(navController: NavController) {
             }
             Spacer(modifier = Modifier.height(16.dp))
         }
-        if (showButtons){
+        if (showButtons ){
             Button(onClick = {navController.navigate("calendar")}) {
                 Text(text = "Calendario")
             }
