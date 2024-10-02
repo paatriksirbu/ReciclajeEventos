@@ -34,7 +34,6 @@ class CalendarActivity : ComponentActivity() {
 
         monthYearText.text = "${month.name} $year"
 
-        fillCalendar(calendarRow, month, year)
     }
 
     @Composable
