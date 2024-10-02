@@ -36,16 +36,16 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
         setContent {
             ReciclajeEventosTheme {
                 val navController = rememberNavController()
                 PantallaPrincipal(navController)
-
             }
         }
     }
 }
+
 
 @Composable
 fun PantallaPrincipal(navController: NavController) {
