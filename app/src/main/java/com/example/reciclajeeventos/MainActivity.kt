@@ -51,65 +51,63 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-}
+    }
 
-@Composable
-fun PantallaPrincipal(navController: NavController) {
+    @Composable
+    fun PantallaPrincipal(navController: NavController) {
 
-    ReciclajeEventosTheme {
-        var showButtons by remember { mutableStateOf(false) }
-        var greetingText by remember { mutableStateOf("Bienvenido, EcoAmigo!") }
-        Column(
-            modifier = Modifier.fillMaxSize().background(colorResource(id = R.color.verde_claro)).padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            //De esta manera solo mostramos el texto de saludo cuando no se han mostrado las opciones.
-            if(!showButtons){
-                Text(text = greetingText)
-                Spacer(modifier = Modifier.height(16.dp))
+        ReciclajeEventosTheme {
+            var showButtons by remember { mutableStateOf(false) }
+            var greetingText by remember { mutableStateOf("Bienvenido, EcoAmigo!") }
+            Column(
+                modifier = Modifier.fillMaxSize().padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                //De esta manera solo mostramos el texto de saludo cuando no se han mostrado las opciones.
+                if (!showButtons) {
+                    Text(text = greetingText)
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
+
+                //Creamos un boton principal para mostrar las opciones
+
+                if (!showButtons && greetingText.equals("Bienvenido, EcoAmigo!")) {
+                    Button(
+                        onClick = { showButtons = true },
+                        modifier = Modifier.padding(vertical = 8.dp).height(50.dp)
+                    ) {
+                        Text(text = "Mostrar opciones")
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
+                if (showButtons) {
+                    Button(onClick = { navController.navigate("calendar") }) {
+                        Text(text = "Calendario")
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Button(onClick = { navController.navigate("mapa") }) {
+                        Text(text = "Mapa")
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Button(onClick = { navController.navigate("estadisticas") }) {
+                        Text(text = "Estadisticas")
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
             }
 
-            //Creamos un boton principal para mostrar las opciones
-
-            if(!showButtons && greetingText.equals("Bienvenido, EcoAmigo!")) {
-                Button(
-                    onClick = { showButtons = true },
-                    modifier = Modifier.padding(vertical = 8.dp).height(50.dp)
-                ) {
-                    Text(text = "Mostrar opciones")
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-            }
-            if (showButtons ){
-                Button(onClick = {navController.navigate("calendar")}) {
-                    Text(text = "Calendario")
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Button(onClick = {navController.navigate("mapa")}) {
-                    Text(text = "Mapa")
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Button(onClick = {navController.navigate("estadisticas")}) {
-                    Text(text = "Estadisticas")
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-            }
         }
 
     }
 
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-
-    ReciclajeEventosTheme {
-        
-    }
-
+    @Preview(showBackground = true)
+    @Composable
+    fun GreetingPreview() {
+        ReciclajeEventosTheme {
+            PantallaPrincipal(rememberNavController())
+        }
     }
 }
