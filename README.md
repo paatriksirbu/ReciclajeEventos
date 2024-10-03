@@ -12,7 +12,9 @@ En la pantalla principal se le muestra al usuario un botón para hacer saltas la
 ## PANTALLAS INDIVIDUALES:
 --------------------------------
 Calendario: Se muestra el calendario de octubre, mes de la realización de la práctica
+----
 Mapa: Se muestra el mapa de Madrid
+----
 Estadisticas: Permite llevar un control del reciclaje. 
 
 
