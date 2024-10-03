@@ -31,7 +31,7 @@ class CalendarActivity : ComponentActivity() {
         val month = Month.OCTOBER
         val year = 2024
 
-        // Seteamos el nombre del mes y el año en el TextView
+
         monthYearText.text = "${month.name} $year"
 
         val composeView = findViewById<ComposeView>(R.id.compose_calendar)
