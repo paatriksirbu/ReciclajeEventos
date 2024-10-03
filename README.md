@@ -16,5 +16,5 @@ Calendario: Se muestra el calendario de octubre, mes de la realización de la pr
 Mapa: Se muestra el mapa de Madrid
 ----
 Estadisticas: Permite llevar un control del reciclaje. 
-
+----
 
