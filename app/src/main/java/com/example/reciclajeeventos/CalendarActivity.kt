@@ -1,14 +1,19 @@
 package com.example.reciclajeeventos
 
 import android.os.Bundle
+import android.widget.TableRow
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import java.time.LocalDate
@@ -22,9 +27,11 @@ class CalendarActivity : ComponentActivity() {
         setContentView(R.layout.activity_calendar)
 
         val monthYearText = findViewById<TextView>(R.id.month_year_text)
+        val calendarRow = findViewById<TableRow>(R.id.calendar_row)
         val month = Month.OCTOBER
         val year = 2024
 
+        // Seteamos el nombre del mes y el año en el TextView
         monthYearText.text = "${month.name} $year"
 
         val composeView = findViewById<ComposeView>(R.id.compose_calendar)
@@ -36,38 +43,30 @@ class CalendarActivity : ComponentActivity() {
     @Composable
     fun CalendarPreview(month: Month, year: Int) {
         val daysInMonth = LocalDate.of(year, month.value, 1).lengthOfMonth()
+        // Ajustamos el primer día del mes. El valor % 7 para hacer que el calendario empiece correctamente.
         val firstDayOfMonth = LocalDate.of(year, month.value, 1).dayOfWeek.value % 7
 
         var currentDay = 1
 
         Column {
-            // Título de los días de la semana
-            Row(modifier = Modifier.fillMaxWidth()) {
-                val daysOfWeek = listOf("Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom")
-                for (day in daysOfWeek) {
-                    Text(
-                        text = day,
-                        modifier = Modifier.weight(1f).padding(8.dp),
-                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                    )
-                }
-            }
+            for (week in 0..5) { // Generamos las semanas del mes
+                Row {
+                    for (dayOfWeek in 1..7) { // Días de la semana (1 = lunes, 7 = domingo)
+                        // Calculamos el número del día que corresponde a la semana actual
+                        val day = (week * 7 + dayOfWeek) - (firstDayOfMonth - 1)
 
-            // Días del mes
-            for (week in 0..5) { // Máximo de 6 semanas en un mes
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    for (dayOfWeek in 0..6) { // Días de la semana (0 = Lunes, 6 = Domingo)
-                        if (week == 0 && dayOfWeek < firstDayOfMonth || currentDay > daysInMonth) {
-                            // Colocamos un espacio vacío si no hay día que mostrar
-                            Spacer(modifier = Modifier.weight(1f).padding(8.dp))
-                        } else {
-                            // Mostramos el día actual
+                        if (day in 1..daysInMonth) {
+                            // Mostramos el día en el calendario
                             Text(
-                                text = currentDay.toString(),
-                                modifier = Modifier.weight(1f).padding(8.dp),
-                                textAlign = androidx.compose.ui.text.style.TextAlign.Center // Centramos el texto
+                                text = day.toString(),
+                                modifier = Modifier
+                                    .weight(1f) // Se asegura de que cada día ocupe el mismo espacio
+                                    .padding(8.dp),
+                                textAlign = TextAlign.Center // Centramos el texto
                             )
-                            currentDay++
+                        } else {
+                            // Espacio vacío para los días fuera de los límites del mes
+                            Spacer(modifier = Modifier.weight(1f)) // Se asegura que el espacio vacío tenga el mismo peso que los días
                         }
                     }
                 }
