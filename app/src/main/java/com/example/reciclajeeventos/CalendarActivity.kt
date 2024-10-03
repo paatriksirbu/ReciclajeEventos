@@ -1,22 +1,16 @@
 package com.example.reciclajeeventos
 
 import android.os.Bundle
-import android.widget.TableLayout
-import android.widget.TableRow
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.view.children
 import java.time.LocalDate
 import java.time.Month
 
@@ -28,7 +22,6 @@ class CalendarActivity : ComponentActivity() {
         setContentView(R.layout.activity_calendar)
 
         val monthYearText = findViewById<TextView>(R.id.month_year_text)
-        val calendarRow = findViewById<TableRow>(R.id.calendar_row)
         val month = Month.OCTOBER
         val year = 2024
 
@@ -38,25 +31,43 @@ class CalendarActivity : ComponentActivity() {
         composeView.setContent {
             CalendarPreview(month, year)
         }
-
     }
 
     @Composable
     fun CalendarPreview(month: Month, year: Int) {
         val daysInMonth = LocalDate.of(year, month.value, 1).lengthOfMonth()
-        val firstDayOfMonth = (LocalDate.of(year, month.value, 1).dayOfWeek.value % 7)
+        val firstDayOfMonth = LocalDate.of(year, month.value, 1).dayOfWeek.value % 7
 
         var currentDay = 1
 
         Column {
-            for (week in 0..5) {
-                Row {
-                    for (dayOfWeek in 1..7) {
-                        val day = (week * 7 + dayOfWeek) - (firstDayOfMonth - 1)
-                        if (day in 1..daysInMonth) {
-                            Text(text = day.toString(), modifier = Modifier.padding(8.dp))
+            // Título de los días de la semana
+            Row(modifier = Modifier.fillMaxWidth()) {
+                val daysOfWeek = listOf("Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom")
+                for (day in daysOfWeek) {
+                    Text(
+                        text = day,
+                        modifier = Modifier.weight(1f).padding(8.dp),
+                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                    )
+                }
+            }
+
+            // Días del mes
+            for (week in 0..5) { // Máximo de 6 semanas en un mes
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    for (dayOfWeek in 0..6) { // Días de la semana (0 = Lunes, 6 = Domingo)
+                        if (week == 0 && dayOfWeek < firstDayOfMonth || currentDay > daysInMonth) {
+                            // Colocamos un espacio vacío si no hay día que mostrar
+                            Spacer(modifier = Modifier.weight(1f).padding(8.dp))
                         } else {
-                            Spacer(modifier = Modifier.padding(8.dp))
+                            // Mostramos el día actual
+                            Text(
+                                text = currentDay.toString(),
+                                modifier = Modifier.weight(1f).padding(8.dp),
+                                textAlign = androidx.compose.ui.text.style.TextAlign.Center // Centramos el texto
+                            )
+                            currentDay++
                         }
                     }
                 }
@@ -70,4 +81,3 @@ class CalendarActivity : ComponentActivity() {
         CalendarPreview(Month.OCTOBER, 2024)
     }
 }
-

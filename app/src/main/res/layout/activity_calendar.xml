@@ -4,53 +4,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/verde_claro">
 
-    <!-- Contenedor para los botones de navegación entre meses y el texto del mes/año -->
-    <LinearLayout
+    <TextView
+        android:id="@+id/month_year_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:layout_gravity="center"
+        android:paddingBottom="16dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAlignment="center" />
 
-        <!-- Botón para mes anterior -->
-        <Button
-            android:id="@+id/prev_month_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="<--" />
-
-        <!-- Texto para el mes y año, centrado -->
-        <TextView
-            android:id="@+id/month_year_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textAlignment="center" />
-
-        <!-- Botón para mes siguiente -->
-        <Button
-            android:id="@+id/next_month_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-->" />
-
-    </LinearLayout>
-
-    <!-- TableLayout para los días de la semana y los números -->
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:stretchColumns="*"
         android:layout_gravity="center">
 
-        <!-- Fila para los nombres de los días de la semana -->
         <TableRow>
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -108,28 +81,19 @@
                 android:text="Dom" />
         </TableRow>
 
-        <!-- Aquí aparecerán los días del mes -->
         <TableRow
-            android:id="@+id/calendar_row_1"
+            android:id="@+id/calendar_row"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TableRow
-            android:id="@+id/calendar_row_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TableRow
-            android:id="@+id/calendar_row_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TableRow
-            android:id="@+id/calendar_row_4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TableRow
-            android:id="@+id/calendar_row_5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+
+            <!-- Aquí se agregarán las celdas de los días del mes dinámicamente -->
+
+        </TableRow>
     </TableLayout>
 
-</LinearLayout>
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compose_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
+</LinearLayout>
