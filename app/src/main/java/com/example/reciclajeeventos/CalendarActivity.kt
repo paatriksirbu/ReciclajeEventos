@@ -1,6 +1,7 @@
 package com.example.reciclajeeventos
 
 import android.os.Bundle
+import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -13,9 +14,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.view.children
 import java.time.LocalDate
 import java.time.Month
 
@@ -31,42 +32,57 @@ class CalendarActivity : ComponentActivity() {
         val month = Month.OCTOBER
         val year = 2024
 
-
         monthYearText.text = "${month.name} $year"
 
-        val composeView = findViewById<ComposeView>(R.id.compose_calendar)
-        composeView.setContent {
-            CalendarPreview(month, year)
+    }
+
+    @Composable
+    private fun fillCalendar(calendarRow: TableRow, month: Month, year: Int) {
+        val daysInMonth = LocalDate.of(year, month, 1).lengthOfMonth()
+        val firstDayOfMonth = LocalDate.of(year, month, 1).dayOfWeek.value
+
+        var currentDay = 1
+
+        for (row in 0..5) { // Máximo 6 filas para el mes
+            val tableRow = TableRow(this)
+
+            for (column in 0..6) { // 7 días de la semana
+                val textView = TextView(this).apply {
+                    layoutParams = TableRow.LayoutParams(
+                        0,
+                        TableRow.LayoutParams.WRAP_CONTENT,
+                        1f // Ocupa el mismo espacio
+                    )
+                    gravity = android.view.Gravity.CENTER
+                    if (row == 0 && column < firstDayOfMonth - 1 || currentDay > daysInMonth) {
+                        // Espacio en blanco
+                        text = ""
+                    } else {
+                        // Mostrar el día
+                        text = currentDay.toString()
+                        currentDay++
+                    }
+                }
+                tableRow.addView(textView)
+            }
+            calendarRow.addView(tableRow)
         }
     }
 
     @Composable
     fun CalendarPreview(month: Month, year: Int) {
         val daysInMonth = LocalDate.of(year, month.value, 1).lengthOfMonth()
-        // Ajustamos el primer día del mes. El valor % 7 para hacer que el calendario empiece correctamente.
-        val firstDayOfMonth = LocalDate.of(year, month.value, 1).dayOfWeek.value % 7
-
-        var currentDay = 1
+        val firstDayOfMonth = LocalDate.of(year, month.value, 1).dayOfWeek.value
 
         Column {
-            for (week in 0..5) { // Generamos las semanas del mes
+            for (week in 0..5) {
                 Row {
-                    for (dayOfWeek in 1..7) { // Días de la semana (1 = lunes, 7 = domingo)
-                        // Calculamos el número del día que corresponde a la semana actual
+                    for (dayOfWeek in 1..7) {
                         val day = (week * 7 + dayOfWeek) - (firstDayOfMonth - 1)
-
                         if (day in 1..daysInMonth) {
-                            // Mostramos el día en el calendario
-                            Text(
-                                text = day.toString(),
-                                modifier = Modifier
-                                    .weight(1f) // Se asegura de que cada día ocupe el mismo espacio
-                                    .padding(8.dp),
-                                textAlign = TextAlign.Center // Centramos el texto
-                            )
+                            Text(text = day.toString(), modifier = Modifier.padding(8.dp))
                         } else {
-                            // Espacio vacío para los días fuera de los límites del mes
-                            Spacer(modifier = Modifier.weight(1f)) // Se asegura que el espacio vacío tenga el mismo peso que los días
+                            Spacer(modifier = Modifier.padding(8.dp))
                         }
                     }
                 }
@@ -74,9 +90,4 @@ class CalendarActivity : ComponentActivity() {
         }
     }
 
-    @Preview(showBackground = true)
-    @Composable
-    fun CalendarPreview() {
-        CalendarPreview(Month.OCTOBER, 2024)
-    }
 }

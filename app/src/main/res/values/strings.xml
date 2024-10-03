@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ReciclajeEventos</string>
+    <string name="mapa_de_puntos_de_reciclaje_en_tu_ciudad">Mapa de puntos de reciclaje en tu ciudad</string>
+    <string name="texto_mapa">mapa de puntos de reciclaje en tu ciudad</string>
 </resources>
