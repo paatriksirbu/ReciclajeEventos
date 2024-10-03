@@ -1,94 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:padding="16dp"
-    android:stretchColumns="*">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
 
-    <!-- Fila para el mes y año -->
-    <TableRow>
+    <!-- Contenedor para los botones de navegación entre meses y el texto del mes/año -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
 
+        <!-- Botón para mes anterior -->
+        <Button
+            android:id="@+id/prev_month_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="<--" />
+
+        <!-- Texto para el mes y año, centrado -->
         <TextView
             android:id="@+id/month_year_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_span="7"
-            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textAlignment="center" />
 
-
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            android:layout_width="0dp"
+        <!-- Botón para mes siguiente -->
+        <Button
+            android:id="@+id/next_month_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/cell_border"
-            android:gravity="center"
-            android:text="Lun" />
+            android:text="-->" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/cell_border"
-            android:gravity="center"
-            android:text="Mar" />
+    </LinearLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/cell_border"
-            android:gravity="center"
-            android:text="Mié" />
+    <!-- TableLayout para los días de la semana y los números -->
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        android:layout_gravity="center">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/cell_border"
-            android:gravity="center"
-            android:text="Jue" />
+        <!-- Fila para los nombres de los días de la semana -->
+        <TableRow>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/cell_border"
-            android:gravity="center"
-            android:text="Vie" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:gravity="center"
+                android:text="Lun" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/cell_border"
-            android:gravity="center"
-            android:text="Sab" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:gravity="center"
+                android:text="Mar" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/cell_border"
-            android:gravity="center"
-            android:text="Dom" />
-    </TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:gravity="center"
+                android:text="Mié" />
 
-    <TableRow
-        android:id="@+id/calendar_row"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:gravity="center"
+                android:text="Jue" />
 
-    <androidx.compose.ui.platform.ComposeView
-        android:id="@+id/compose_calendar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:gravity="center"
+                android:text="Vie" />
 
-</TableLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:gravity="center"
+                android:text="Sab" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:gravity="center"
+                android:text="Dom" />
+        </TableRow>
+
+        <!-- Aquí aparecerán los días del mes -->
+        <TableRow
+            android:id="@+id/calendar_row_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TableRow
+            android:id="@+id/calendar_row_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TableRow
+            android:id="@+id/calendar_row_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TableRow
+            android:id="@+id/calendar_row_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TableRow
+            android:id="@+id/calendar_row_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </TableLayout>
+
+</LinearLayout>
+
