@@ -93,7 +93,7 @@ class MainActivity : ComponentActivity() {
                         val intent = Intent(context, CalendarActivity::class.java)
                         context.startActivity(intent)
                     }){
-                        Text(text = "Calendario")
+                        Text(text = "Calendario de actividades")
                     }
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -101,7 +101,7 @@ class MainActivity : ComponentActivity() {
                         val intent = Intent(context, MapActivity::class.java)
                         context.startActivity(intent)
                     }) {
-                        Text(text = "Mapa")
+                        Text(text = "Mapa de puntos de reciclaje")
                     }
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -109,7 +109,7 @@ class MainActivity : ComponentActivity() {
                         val intent = Intent(context, EstadisticasActivity::class.java)
                         context.startActivity(intent)
                     }) {
-                        Text(text = "Estadisticas")
+                        Text(text = "Estadisticas de reciclaje")
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                 }
