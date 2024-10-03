@@ -7,11 +7,24 @@
     android:padding="16dp"
     android:background="@color/verde_claro">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="-100dp"
+        android:text="Estadísticas de Reciclaje"
+        android:textStyle="bold">
+
+    </TextView>
+
     <!-- TableLayout centrado -->
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:stretchColumns="0,1,2">
+        android:stretchColumns="0,1,2"
+        android:outlineAmbientShadowColor="@color/black">
+
+
+
 
         <!-- Primera fila con las categorías de reciclaje -->
         <TableRow>
