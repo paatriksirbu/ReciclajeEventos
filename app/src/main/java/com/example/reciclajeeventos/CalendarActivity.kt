@@ -34,45 +34,19 @@ class CalendarActivity : ComponentActivity() {
 
         monthYearText.text = "${month.name} $year"
 
-    }
-
-    @Composable
-    private fun fillCalendar(calendarRow: TableRow, month: Month, year: Int) {
-        val daysInMonth = LocalDate.of(year, month, 1).lengthOfMonth()
-        val firstDayOfMonth = LocalDate.of(year, month, 1).dayOfWeek.value
-
-        var currentDay = 1
-
-        for (row in 0..5) { // Máximo 6 filas para el mes
-            val tableRow = TableRow(this)
-
-            for (column in 0..6) { // 7 días de la semana
-                val textView = TextView(this).apply {
-                    layoutParams = TableRow.LayoutParams(
-                        0,
-                        TableRow.LayoutParams.WRAP_CONTENT,
-                        1f // Ocupa el mismo espacio
-                    )
-                    gravity = android.view.Gravity.CENTER
-                    if (row == 0 && column < firstDayOfMonth - 1 || currentDay > daysInMonth) {
-                        // Espacio en blanco
-                        text = ""
-                    } else {
-                        // Mostrar el día
-                        text = currentDay.toString()
-                        currentDay++
-                    }
-                }
-                tableRow.addView(textView)
-            }
-            calendarRow.addView(tableRow)
+        val composeView = findViewById<ComposeView>(R.id.compose_calendar)
+        composeView.setContent {
+            CalendarPreview(month, year)
         }
+
     }
 
     @Composable
     fun CalendarPreview(month: Month, year: Int) {
         val daysInMonth = LocalDate.of(year, month.value, 1).lengthOfMonth()
-        val firstDayOfMonth = LocalDate.of(year, month.value, 1).dayOfWeek.value
+        val firstDayOfMonth = (LocalDate.of(year, month.value, 1).dayOfWeek.value % 7)
+
+        var currentDay = 1
 
         Column {
             for (week in 0..5) {
@@ -90,4 +64,10 @@ class CalendarActivity : ComponentActivity() {
         }
     }
 
+    @Preview(showBackground = true)
+    @Composable
+    fun CalendarPreview() {
+        CalendarPreview(Month.OCTOBER, 2024)
+    }
 }
+

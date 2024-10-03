@@ -1,73 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:stretchColumns="*">
 
     <!-- Fila para el mes y año -->
     <TableRow>
+
         <TextView
             android:id="@+id/month_year_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textStyle="bold"
             android:layout_gravity="center"
+            android:layout_span="7"
             android:paddingBottom="16dp"
-            android:layout_span="7" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+
     </TableRow>
 
     <TableRow>
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Lun"
-            android:gravity="center"/>
+            android:background="@drawable/cell_border"
+            android:gravity="center"
+            android:text="Lun" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mar"
-            android:gravity="center"/>
+            android:background="@drawable/cell_border"
+            android:gravity="center"
+            android:text="Mar" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mié"
-            android:gravity="center"/>
+            android:background="@drawable/cell_border"
+            android:gravity="center"
+            android:text="Mié" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Jue"
-            android:gravity="center"/>
+            android:background="@drawable/cell_border"
+            android:gravity="center"
+            android:text="Jue" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Vie"
-            android:gravity="center"/>
+            android:background="@drawable/cell_border"
+            android:gravity="center"
+            android:text="Vie" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sab"
-            android:gravity="center"/>
+            android:background="@drawable/cell_border"
+            android:gravity="center"
+            android:text="Sab" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Dom"
-            android:gravity="center"/>
+            android:background="@drawable/cell_border"
+            android:gravity="center"
+            android:text="Dom" />
     </TableRow>
 
     <TableRow
         android:id="@+id/calendar_row"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
-
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compose_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </TableLayout>
